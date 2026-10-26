@@ -297,6 +297,7 @@ section > .wrap > * { min-width: 0; }
 .fam-bars .in { background: var(--accent); color: var(--accent-ink); }
 .fam-bars .out { background: var(--ink); color: var(--surface); }
 .fam-bars .gap { background: repeating-linear-gradient(135deg, var(--debt) 0 8px, var(--debt-2) 8px 16px); color: var(--debt-ink); }
+@media (max-width: 520px) { .fam-bars .gap { font-size: 0; padding: 0; } } /* la cifra è già scritta nella frase sopra */
 .fam-nota { background: var(--surface); border-left: 4px solid var(--neg); border-radius: 0 var(--r-sm) var(--r-sm) 0; padding: 14px 16px; }
 .fam-sheet h3 { margin-bottom: 8px; }
 .fam-row { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 9px 6px; border-radius: 12px; cursor: pointer; background: none; border: 0; width: 100%; text-align: left; transition: background .15s; }
@@ -464,7 +465,7 @@ button.bar-row:hover, .panel .bar-row:hover { background: var(--surface-2); }
 .receipt { width: 100%; max-width: 420px; background: var(--paper); color: var(--paper-ink); font-family: var(--f-mono); font-size: .88rem; line-height: 1.5; padding: 24px 24px 36px; transform: rotate(-1.2deg); box-shadow: 0 24px 50px rgb(0 0 0 / .4); animation: print .8s var(--ease);
   -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%; mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / 14px 100%; }
 @keyframes print { from { transform: rotate(-1.2deg) translateY(-18px); opacity: .3; } }
-@media (max-width: 520px) { .receipt { transform: none; animation-name: printDritto; } }
+@media (max-width: 520px) { .receipt { transform: none; animation-name: printDritto; font-size: .8rem; padding: 20px 16px 32px; } .receipt .rl { gap: 6px; } }
 @keyframes printDritto { from { transform: translateY(-18px); opacity: .3; } }
 .receipt .rh { text-align: center; display: grid; gap: 2px; padding-bottom: 10px; border-bottom: 1px dashed var(--paper-ink-2); margin-bottom: 10px; }
 .receipt .rh b { font-size: 1rem; letter-spacing: .14em; }
@@ -491,7 +492,15 @@ button.bar-row:hover, .panel .bar-row:hover { background: var(--surface-2); }
 .cmp-chip button { border: 0; background: var(--track); border-radius: 50%; width: 26px; height: 26px; cursor: pointer; display: grid; place-items: center; color: var(--ink-2); flex: none; }
 .cmp-tools { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 .cmp-tools select { max-width: 340px; }
-@media (max-width: 640px) { .cmp-chip { width: 100%; } .cmp-chip > span:nth-child(2) { flex: 1; } .cmp-tools select { width: 100%; max-width: none; } }
+@media (max-width: 640px) {
+  .cmp-chip { width: 100%; display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; column-gap: 10px; row-gap: 2px; align-items: center; }
+  .cmp-chip .sw { grid-row: 1; }
+  .cmp-chip > span:nth-child(2) { grid-column: 2; grid-row: 1; font-weight: 600; }
+  .cmp-chip b { grid-column: 2; grid-row: 2; }
+  .cmp-chip small { grid-column: 2; grid-row: 3; }
+  .cmp-chip button { grid-column: 3; grid-row: 1 / span 3; }
+  .cmp-tools select { width: 100%; max-width: none; }
+}
 .chart { position: relative; }
 .chart svg { display: block; width: 100%; height: auto; overflow: visible; }
 .chart .axis text { fill: var(--ink-3); font: 12px var(--f-body); font-variant-numeric: tabular-nums; }
@@ -557,7 +566,7 @@ button.bar-row:hover, .panel .bar-row:hover { background: var(--surface-2); }
 .reg-wrap { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: clamp(20px, 4vw, 48px); align-items: start; }
 @media (max-width: 860px) { .reg-wrap { grid-template-columns: 1fr; } }
 .regmap { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; max-width: 380px; width: 100%; }
-@media (max-width: 520px) { .regmap { max-width: 300px; margin-inline: auto; } .reg { border-radius: 9px; font-size: .75rem; } .reg small { font-size: .56rem; } }
+@media (max-width: 520px) { .regmap { max-width: none; gap: 5px; } .reg { border-radius: 9px; font-size: .78rem; } .reg small { font-size: .62rem; } }
 .reg { aspect-ratio: 1; border-radius: 12px; border: 0; display: grid; place-items: center; align-content: center; gap: 2px; font-weight: 800; font-size: .85rem; cursor: pointer; transition: transform .2s var(--ease), box-shadow .2s; animation: pop .5s cubic-bezier(.3, 1.4, .5, 1) backwards; animation-delay: calc(var(--i, 0) * 25ms); }
 .reg small { font-weight: 600; font-size: .62rem; opacity: .85; font-variant-numeric: tabular-nums; }
 .reg:hover, .reg.on { transform: scale(1.08); box-shadow: 0 0 0 3px var(--ink); position: relative; z-index: 1; }
@@ -605,6 +614,8 @@ footer a { color: var(--hero-ink); }
   .share-top { display: none; }
   .fab { display: grid; place-items: center; position: fixed; right: max(16px, env(safe-area-inset-right, 0px)); bottom: calc(86px + env(safe-area-inset-bottom, 0px)); z-index: 24; width: 54px; height: 54px; border-radius: 50%; border: 0; background: var(--accent); color: var(--accent-ink); box-shadow: var(--shadow-up); cursor: pointer; }
   .fab svg { width: 24px; height: 24px; }
+  .fab { transition: transform .3s var(--ease), opacity .3s; }
+  .fab.via { transform: translateY(24px) scale(.6); opacity: 0; pointer-events: none; }
 }
 .share-pop { width: min(520px, calc(100vw - 24px)); }
 .share-text { background: var(--surface-2); border-radius: 14px; padding: 14px 16px; color: var(--ink-2); }
@@ -1570,18 +1581,18 @@ footer a { color: var(--hero-ink); }
     const dif = missione(es, 5) ? valoreMissione(missione(es, 5)) : 0;
     const items = aree(es).sort((a, b) => b.valore - a.valore).flatMap(d => d.id !== "sicurezza" ? [d] : [
       { ...d, breve: "Difesa", valore: dif },
-      { ...d, breve: "Ordine pubblico e giustizia", valore: d.valore - dif },
+      { ...d, breve: "Polizia e giustizia", valore: d.valore - dif },
     ]);
     const tot = d3.sum(items, d => d.valore);
     // Stipendi e rimborsi dei parlamentari in carica: parte della missione "Organi costituzionali", area "Fisco, UE e Stato"
     const parl = PARL ? ["camera", "senato"].reduce((s, k) => s + (PARL[k] ? PARL[k].voci.find(v => v.id === "membri").valore : 0), 0) : 0;
     const giorni = (es.anno % 4 === 0) ? 366 : 365;
     const secondi = amount / (totale(es) / giorni / 86400);
-    const durata = secondi < 1 ? `${nf1.format(secondi * 1000 / 1000)} secondi` : secondi < 120 ? `${nf1.format(secondi)} secondi` : `${nf1.format(secondi / 60)} minuti`;
+    const durata = secondi < 1 ? `${nf0.format(Math.max(1, secondi * 1000))} millesimi di secondo` : secondi < 120 ? `${nf1.format(secondi)} secondi` : `${nf1.format(secondi / 60)} minuti`;
     $("receipt").innerHTML = `
       <div class="rh"><b>IL TUO SCONTRINO</b><span>Spesa dello Stato · ${es.fase_nome} ${es.anno}</span></div>
       ${items.map(d => `<div class="rl"><span class="sw" style="background:${d.color}"></span><span class="n">${d.breve}</span><span>${eur(amount * d.valore / tot)}</span></div>`
-        + (d.id === "stato" && parl ? `<div class="rl sub"><span></span><span class="n">di cui stipendi parlamentari${PARL.senato ? "" : "*"}</span><span>${euroCent(amount * parl / tot)}</span></div>` : "")).join("")}
+        + (d.id === "stato" && parl ? `<div class="rl sub"><span></span><span class="n">di cui parlamentari${PARL.senato ? "" : "*"}</span><span>${euroCent(amount * parl / tot)}</span></div>` : "")).join("")}
       <div class="rt"><span>TOTALE</span><span>${eur(amount)}</span></div>
       <div class="rf">Le tue imposte pagano <b>${durata}</b> di spesa dello Stato.<br>Per ogni 100 € spesi, <b>${copertura(es).d.euro} €</b> sono presi in prestito.<br>Ripartizione indicativa${parl && !PARL.senato ? "<br>* Indennità e rimborsi dei deputati; il Senato sarà aggiunto a breve." : ""}</div>`;
     $("chips").querySelectorAll("button").forEach(b => b.classList.toggle("on", Number(b.dataset.v) === amount));
@@ -2135,7 +2146,7 @@ footer a { color: var(--hero-ink); }
   function miniTrend(host, punti, color, opz = {}) {
     host.innerHTML = "";
     if (punti.length < 2) { host.innerHTML = '<p class="muted">Serie storica non disponibile.</p>'; return; }
-    const W = Math.max(300, host.clientWidth || 900), H = Math.round(Math.min(300, Math.max(200, W * 0.32))), M = { t: 24, r: 16, b: 28, l: 44 };
+    const W = Math.max(260, host.clientWidth || 900), H = Math.round(Math.min(300, Math.max(200, W * 0.32))), M = { t: 24, r: 16, b: 28, l: 44 };
     const x = d3.scaleLinear().domain(d3.extent(punti, d => d.anno)).range([M.l, W - M.r]);
     const y = d3.scaleLinear().domain([0, d3.max(punti, d => d.v) * 1.15]).nice().range([H - M.b, M.t]);
     const piccolo = !opz.fmt && d3.max(punti, d => d.v) < 5e9;
@@ -2739,6 +2750,7 @@ footer a { color: var(--hero-ink); }
     $("chips").querySelectorAll("button").forEach(b => b.addEventListener("click", () => { $("inp-tasse").value = b.dataset.v; renderReceipt(cur); store.set("tasse", b.dataset.v); }));
     const seg = (a, b, fn) => [a, b].forEach(id => $(id).addEventListener("click", () => { $(a).setAttribute("aria-pressed", String(id === a)); $(b).setAttribute("aria-pressed", String(id === b)); fn(id === a); }));
     seg("v-mappa", "v-elenco", mappa => { $("treemap").hidden = !mappa; $("bars-missioni").hidden = mappa; if (mappa) renderTreemap(cur); });
+    if (matchMedia("(max-width: 640px)").matches) $("v-elenco").click(); // sul telefono i riquadri piccoli della mappa non si leggono
     seg("t-natura", "t-ministeri", natura => { tabDettagli = natura ? "natura" : "ministeri"; renderDettagli(cur); });
     $("dlg").addEventListener("click", e => { if (e.target === $("dlg")) $("dlg").close(); });
 
@@ -2752,6 +2764,13 @@ footer a { color: var(--hero-ink); }
     })).observe($("trend"));
     new ResizeObserver(() => { if (cur && !$("treemap").hidden) renderTreemap(cur); }).observe($("treemap"));
     new ResizeObserver(() => disegnaSpark()).observe(document.body);
+    // il grafico del debito può essere disegnato a sezione nascosta: si ridisegna quando ha la sua larghezza vera
+    new ResizeObserver(entries => entries.forEach(e => {
+      const w = Math.round(e.contentRect.width);
+      if (!w || ultimaW.get(e.target) === w) return;
+      ultimaW.set(e.target, w);
+      if (cur) renderDebito();
+    })).observe($("dbt-trend"));
 
     // ricerca
     $("sugg").innerHTML = SUGGERITI.map(t => `<button type="button">${t}</button>`).join("");
@@ -2782,6 +2801,9 @@ footer a { color: var(--hero-ink); }
     document.querySelectorAll(".teaser, #semi-mini").forEach(b => b.addEventListener("click", () => vai(b.dataset.v)));
     $("pr-more").addEventListener("click", () => { promesseTutte = !promesseTutte; renderPromesse(); });
     [$("btn-share"), $("fab-share")].forEach(b => b.addEventListener("click", apriCondividi));
+    // il tasto condividi non copre i numeri mentre si legge: sparisce scorrendo in giù, torna scorrendo in su
+    let ultimoY = scrollY;
+    addEventListener("scroll", () => { const y = scrollY; if (Math.abs(y - ultimoY) > 8) { $("fab-share").classList.toggle("via", y > ultimoY && y > 200); ultimoY = y; } }, { passive: true });
     $("share-x").addEventListener("click", () => $("share-pop").close());
     $("share-pop").addEventListener("click", e => { if (e.target === $("share-pop")) $("share-pop").close(); });
     $("sh-copy").addEventListener("click", copiaLink);
