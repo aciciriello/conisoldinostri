@@ -347,6 +347,17 @@ def aggiorna():
     piani += [(a, 2) for a in anni_previsione if a > max(anni_rendiconto)]
     piani += [(a, 3) for a in anni_previsione if a > max(anni_rendiconto)]
 
+    vecchi = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else None
+    avvisi_fonti = []
+    try:
+        dati_coesione = coesione()
+    except RuntimeError as e:  # OpenCoesione rifiuta alcune reti (es. i server di GitHub): si tengono i dati precedenti
+        if not (vecchi and vecchi.get("coesione")):
+            raise
+        dati_coesione = vecchi["coesione"]
+        avvisi_fonti.append(f"OpenCoesione non raggiungibile ({e}): restano i dati aggiornati al "
+                            f"{dati_coesione.get('aggiornato', 'precedente aggiornamento')}")
+
     esercizi = []
     for anno, fase in piani:
         print(f"  {anno} - {FASI[fase]}...", flush=True)
@@ -365,16 +376,16 @@ def aggiorna():
         "demografia": demografia(pop),
         "macro": macro(),
         "europa": europa(),
-        "coesione": coesione(),
+        "coesione": dati_coesione,
         "esercizi": esercizi,
     }
 
     errori, avvisi = controlli(dati)
+    avvisi += avvisi_fonti
     if MANCANTI:  # problema noto del server RGS (errore 500 su alcune missioni): una riga sola nel rapporto
         coppie = sorted({re.search(r"anno=(\d+).*codice=0*(\d+)", u).groups() for u in MANCANTI})
         avvisi.append(f"dettaglio per natura non fornito dal server RGS per {len(coppie)} combinazioni anno/missione "
                       f"(es. {', '.join(f'{a}/missione {c}' for a, c in coppie[:3])}): i totali non ne risentono")
-    vecchi = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else None
     rapporto = {"fonte": "Bilancio dello Stato ed Eurostat", "errori": errori, "avvisi": avvisi, "novita": novita(vecchi, dati)}
     if errori:
         return False, rapporto
