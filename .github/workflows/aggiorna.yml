@@ -1,5 +1,5 @@
 # Aggiornamento settimanale dei dati e pubblicazione su GitHub Pages.
-# Parte ogni lunedì alle 7:30 (ora italiana), a ogni modifica del sito e a mano
+# Parte ogni lunedì mattina (5:30 UTC), a ogni modifica del sito e a mano
 # da Actions → "Aggiorna e pubblica" → Run workflow.
 # Se i controlli di aggiorna.py falliscono, i dati precedenti restano pubblicati
 # e l'esecuzione risulta fallita: GitHub manda un'email al proprietario.
@@ -25,6 +25,7 @@ concurrency:
 jobs:
   aggiorna:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     environment:
       name: github-pages
       url: ${{ steps.pubblica.outputs.page_url }}
@@ -52,6 +53,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add site/data scripts/rapporti
           git diff --cached --quiet || git commit -m "Aggiornamento dati del $(date +%d/%m/%Y)"
+          git pull --rebase
           git push
 
       - uses: actions/configure-pages@v5

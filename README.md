@@ -35,29 +35,19 @@ Prima installazione dell'ambiente Python:
 python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 ```
 
-## Aggiornamento automatico settimanale
+## Aggiornamento automatico e pubblicazione
 
-```bash
-bash scripts/programma_settimanale.sh
-```
+Il sito è pubblicato su **https://conisoldinostri.it** con GitHub Pages (repository `aciciriello/conisoldinostri`, DNS su Aruba: 4 record A verso GitHub e `www` in CNAME su `aciciriello.github.io`).
 
-Esegue `aggiorna.py` ogni lunedì alle 7:30 e mostra una notifica sul Mac se ci sono novità o errori. Per toglierlo: `bash scripts/programma_settimanale.sh rimuovi`.
+Il flusso `.github/workflows/aggiorna.yml` esegue `aggiorna.py` ogni lunedì mattina, salva nel repository i nuovi dati e il rapporto, e ripubblica il sito. Si può lanciare anche a mano da GitHub → Actions → "Aggiorna e pubblica" → Run workflow. Ogni modifica a `site/` inviata su `main` viene pubblicata subito.
 
-Sul server di pubblicazione si usa invece cron:
+Se un controllo fallisce, online restano i dati precedenti e l'esecuzione risulta fallita: GitHub manda un'email al proprietario.
 
-```
-30 7 * * 1 cd /percorso/CruscottoSpesaStato && .venv/bin/python scripts/aggiorna.py
-```
-
-Se la variabile `PUBBLICA_CMD` è impostata (per esempio un `rsync` della cartella `site/` verso il server), viene eseguita automaticamente quando ci sono novità e nessun errore.
+Per aggiornare a mano dal Mac e pubblicare: `.venv/bin/python scripts/aggiorna.py`, poi `git commit` e `git push`.
 
 ## Senato: procedura manuale annuale
 
 Il sito del Senato non consente lo scaricamento automatico dei documenti. Quando esce il nuovo bilancio interno (Doc. VIII, di solito a dicembre), scaricarlo da senato.it → Cittadini → Spese e trasparenza → Bilancio interno, e inserire le cifre nella sezione `"senato"` di `site/data/parlamento.json` con la stessa struttura della Camera.
-
-## Pubblicare
-
-La cartella `site/` è un sito statico: basta copiarla su qualsiasi hosting (nginx, Netlify, GitHub Pages). Non serve un backend.
 
 ## Scelte di metodo
 
