@@ -1,0 +1,7 @@
+.venv/
+.claude/
+__pycache__/
+scripts/.cache/
+scripts/rapporti/launchd.log
+*.pdf
+.DS_Store

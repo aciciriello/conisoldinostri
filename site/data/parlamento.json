@@ -1,0 +1,170 @@
+{
+  "_nota": "Dati inseriti a mano dai bilanci interni ufficiali, da aggiornare una volta l'anno. Importi in euro.",
+  "camera": {
+    "nome": "Camera dei deputati",
+    "anno": 2025,
+    "leg": 19,
+    "doc_n": 8,
+    "documento": "Conto consuntivo della Camera dei deputati per l'anno finanziario 2025 (Doc. VIII n. 7), deliberato il 17 giugno 2026",
+    "url": "https://documenti.camera.it/_dati/leg19/lavori/documentiparlamentari/indiceetesti/008/007/INTERO.pdf",
+    "misura": "impegni di spesa, riclassificazione funzionale (allegato 1)",
+    "membri": 400,
+    "dotazione_stato": 943160000,
+    "dotazione_nota": "Dotazione annuale dal bilancio dello Stato (capitolo 1000 delle entrate), invariata da oltre quindici anni.",
+    "totale": 960583587,
+    "voci": [
+      {
+        "id": "pensionati",
+        "nome": "Pensioni degli ex dipendenti",
+        "valore": 325121000
+      },
+      {
+        "id": "personale",
+        "nome": "Personale dipendente",
+        "valore": 210945179
+      },
+      {
+        "id": "ex_membri",
+        "nome": "Vitalizi e pensioni degli ex deputati",
+        "valore": 129700000
+      },
+      {
+        "id": "funzionamento",
+        "nome": "Sedi, servizi, informatica, imposte e altre spese",
+        "valore": 138636572
+      },
+      {
+        "id": "membri",
+        "nome": "Deputati in carica",
+        "valore": 81954164
+      },
+      {
+        "id": "altro_personale",
+        "nome": "Collaboratori e altro personale",
+        "valore": 39889730
+      },
+      {
+        "id": "gruppi",
+        "nome": "Contributo ai gruppi parlamentari",
+        "valore": 30870000
+      },
+      {
+        "id": "commissioni",
+        "nome": "Commissioni, giunte e comitati",
+        "valore": 3466942
+      }
+    ],
+    "membro_annuo": {
+      "_fonte": "Capitoli 1000 e 1005, previsioni definitive 2025",
+      "voci": [
+        {
+          "nome": "Indennità parlamentare (lorda)",
+          "valore": 50140000
+        },
+        {
+          "nome": "Rimborso spese di soggiorno (diaria)",
+          "valore": 16830000
+        },
+        {
+          "nome": "Rimborso spese per l'esercizio del mandato",
+          "valore": 14120000
+        },
+        {
+          "nome": "Rimborso spese di viaggio",
+          "valore": 5400000
+        },
+        {
+          "nome": "Indennità d'ufficio (cariche interne)",
+          "valore": 2750000
+        },
+        {
+          "nome": "Rimborso spese telefoniche",
+          "valore": 490000
+        }
+      ]
+    }
+  },
+  "senato": {
+    "nome": "Senato della Repubblica",
+    "anno": 2025,
+    "documento": "Progetto di bilancio interno del Senato per l'anno finanziario 2025 (Doc. VIII n. 6), deliberato dal Consiglio di Presidenza il 16 dicembre 2025",
+    "url": "https://www.senato.it/leggi-e-documenti/attivita-non-legislative/documenti-non-legislativi?documentoId=52804",
+    "misura": "previsioni di spesa al netto dei risparmi (il consuntivo 2025 non è ancora pubblicato)",
+    "previsione": true,
+    "membri": 200,
+    "dotazione_stato": 505360500,
+    "dotazione_nota": "Dotazione annuale dal bilancio dello Stato, invariata dal 2011.",
+    "totale": 575000000,
+    "voci": [
+      {
+        "id": "pensionati",
+        "nome": "Pensioni degli ex dipendenti",
+        "valore": 185200000
+      },
+      {
+        "id": "personale",
+        "nome": "Personale dipendente",
+        "valore": 131150000
+      },
+      {
+        "id": "funzionamento",
+        "nome": "Sedi, servizi, informatica, imposte e altre spese",
+        "valore": 100534750
+      },
+      {
+        "id": "ex_membri",
+        "nome": "Vitalizi e pensioni degli ex senatori",
+        "valore": 61000000
+      },
+      {
+        "id": "membri",
+        "nome": "Senatori in carica",
+        "valore": 52545000
+      },
+      {
+        "id": "gruppi",
+        "nome": "Contributo ai gruppi parlamentari",
+        "valore": 22120000
+      },
+      {
+        "id": "altro_personale",
+        "nome": "Collaboratori e altro personale",
+        "valore": 21310000
+      },
+      {
+        "id": "commissioni",
+        "nome": "Commissioni, giunte e comitati",
+        "valore": 1140250
+      }
+    ],
+    "membro_annuo": {
+      "_fonte": "Capitolo 1.1 Emolumenti, previsioni 2025",
+      "voci": [
+        {
+          "nome": "Indennità parlamentare (lorda)",
+          "valore": 26000000
+        },
+        {
+          "nome": "Diaria",
+          "valore": 8700000
+        },
+        {
+          "nome": "Rimborso spese per l'esercizio del mandato",
+          "valore": 10500000
+        },
+        {
+          "nome": "Rimborso forfetario delle spese generali",
+          "valore": 4200000
+        },
+        {
+          "nome": "Indennità d'ufficio (cariche interne)",
+          "valore": 2000000
+        },
+        {
+          "nome": "Rimborso strumenti informatici",
+          "valore": 400000
+        }
+      ]
+    }
+  }
+}
